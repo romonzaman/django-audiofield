@@ -88,17 +88,17 @@ class AudioField(FileField):
             logger.error(error_msg)
             raise forms.ValidationError(error_msg)
 
-        convert_to = request and int(request.POST["convert_type"])
-        ext = ext.split('.')[1]
-        audio_type = CONVERT_TYPE_CHK[convert_to]
-        error_msg = _("not allowed : file format conversion is not allowed for same audio type (except Wav)")
-        if convert_to:
-            if ext == audio_type and ext != 'wav':
-                error_msg += ' %s format !!' % ext
-                logger.error(error_msg)
-                raise forms.ValidationError(error_msg)
-            else:
-                pass
+        # convert_to = request and int(request.POST["convert_type"])
+        # ext = ext.split('.')[1]
+        # audio_type = CONVERT_TYPE_CHK[convert_to]
+        # error_msg = _("not allowed : file format conversion is not allowed for same audio type (except Wav)")
+        # if convert_to:
+        #     if ext == audio_type and ext != 'wav':
+        #         error_msg += ' %s format !!' % ext
+        #         logger.error(error_msg)
+        #         raise forms.ValidationError(error_msg)
+        #     else:
+        #         pass
 
         return data
 
@@ -220,7 +220,7 @@ class AudioField(FileField):
 
                 if os.path.abspath(filename) != os.path.abspath(dst_fullpath):
                     os.rename(filename, dst_fullpath)
-                    self._convert_audio(dst_fullpath, instance, ext[1:4])
+                    # self._convert_audio(dst_fullpath, instance, ext[1:4])
 
                     request = threadlocals.get_current_request()
                     convert_type = int(request.POST["convert_type"])
